@@ -6,7 +6,7 @@ boolean sPressed = false;
 boolean dPressed = false;//your variable declarations here
 public void setup() 
 {
-  size(800, 800);
+  size(700, 700);
 
   Star = new Particle[500];
   for(int p = 0; p < Star.length; p++)
@@ -18,11 +18,13 @@ public void setup()
 }
 public void draw() 
 {
-  background(0, 0, 0, 0);
+  background(0, 0, 0, 20);
   println(wPressed);
   if(wPressed == true)//foreward
   {
     Ship.accelerate(0.075);
+    Ship.Rockets();
+
   }
   if(aPressed == true)//left
   {
@@ -74,8 +76,8 @@ class SpaceShip extends Floater
   public SpaceShip()
   {
     //stuff for the spaceship
-    myCenterX = 400;
-    myCenterY = 400;
+    myCenterX = 350;
+    myCenterY = 350;
     myDirectionX = 0;
     myDirectionY = 0;
     myPointDirection = 0;
@@ -124,8 +126,28 @@ class SpaceShip extends Floater
     xBCorners[3] =-4 * 3;
     yBCorners[3] =-3 * 3;
 
-    // finish making spaceship design
-  }//your code here
+
+
+    
+
+
+
+    // finish making spaceship design-----------------------finish making rocket shape it is too small fix later
+  }
+  public void Rockets() 
+  {	
+  	cCorners = 4;
+  	xCCorners = new int[cCorners];
+  	yCCorners = new int[cCorners];
+  	xCCorners[0] =-15;
+  	yCCorners[0] =  5;
+  	xCCorners[1] =-11;
+  	yCCorners[1] =  4;
+  	xCCorners[2] =-11;
+  	yCCorners[2] = -4;
+  	xCCorners[3] =-15;
+  	yCCorners[3] = -5;
+  }	//your code here
 }
 class Particle
 {
@@ -275,7 +297,17 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
       yRotatedTranslated = (int)((xBCorners[nI]* Math.sin(dRadians)) + (yBCorners[nI] * Math.cos(dRadians))+myCenterY);      
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
-    endShape(CLOSE); 
+    endShape(CLOSE);
+    fill(255, 0, 0, 0); 
+    beginShape();         
+    for(int nI = 0; nI < cCorners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCCorners[nI]* Math.cos(dRadians)) - (yCCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCCorners[nI]* Math.sin(dRadians)) + (yCCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);
   }   
 } 
 
