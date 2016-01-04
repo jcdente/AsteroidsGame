@@ -134,8 +134,21 @@ class SpaceShip extends Floater
 
     // finish making spaceship design-----------------------finish making rocket shape it is too small fix later
   }
+
   public void Rockets() 
   {	
+  	fill(255, 0, 0, 0); 
+  	//declare variables
+    beginShape();         
+    for(int nI = 0; nI < cCorners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCCorners[nI]* Math.cos(dRadians)) - (yCCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCCorners[nI]* Math.sin(dRadians)) + (yCCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);
+
   	cCorners = 4;
   	xCCorners = new int[cCorners];
   	yCCorners = new int[cCorners];
@@ -171,6 +184,7 @@ public void keyPressed()
   if(keyCode == 'W' || keyCode == UP)
   {
     wPressed = true;
+    Ship.Rockets();
   }
   if(keyCode == 'A' || keyCode == LEFT) 
   {
