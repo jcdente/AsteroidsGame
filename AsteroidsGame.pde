@@ -18,7 +18,7 @@ public void setup()
 }
 public void draw() 
 {
-  background(0, 0, 0, 20);
+  background(0, 0, 0, 60);
   println(wPressed);
   if(wPressed == true)//foreward
   {
@@ -137,8 +137,23 @@ class SpaceShip extends Floater
 
   public void Rockets() 
   {	
-  	fill(255, 0, 0, 0); 
+  	fill(255, 0, 0, 75); 
+  	
+  	
   	//declare variables
+  	double dRadians = myPointDirection*(Math.PI/180);
+    int xRotatedTranslated, yRotatedTranslated;
+    cCorners = 4;
+  	xCCorners = new int[cCorners];
+  	yCCorners = new int[cCorners];
+  	xCCorners[0] =-15*2;
+  	yCCorners[0] =  5*2;
+  	xCCorners[1] =-11*2;
+  	yCCorners[1] =  4*2;
+  	xCCorners[2] =-11*2;
+  	yCCorners[2] = -4*2;
+  	xCCorners[3] =-15*2;
+  	yCCorners[3] = -5*2;
     beginShape();         
     for(int nI = 0; nI < cCorners; nI++)    
     {     
@@ -149,18 +164,8 @@ class SpaceShip extends Floater
     }   
     endShape(CLOSE);
 
-  	cCorners = 4;
-  	xCCorners = new int[cCorners];
-  	yCCorners = new int[cCorners];
-  	xCCorners[0] =-15;
-  	yCCorners[0] =  5;
-  	xCCorners[1] =-11;
-  	yCCorners[1] =  4;
-  	xCCorners[2] =-11;
-  	yCCorners[2] = -4;
-  	xCCorners[3] =-15;
-  	yCCorners[3] = -5;
-  }	//your code here
+  	
+  }	//your code here*3
 }
 class Particle
 {
