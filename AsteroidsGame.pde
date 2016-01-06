@@ -22,8 +22,8 @@ public void draw()
   println(wPressed);
   if(wPressed == true)//foreward
   {
-    Ship.accelerate(0.075);
-    Ship.Rockets();
+    //Ship.accelerate(0.075);
+    Ship.RocketsRear();
 
   }
   if(aPressed == true)//left
@@ -135,7 +135,7 @@ class SpaceShip extends Floater
     // finish making spaceship design-----------------------finish making rocket shape it is too small fix later
   }
 
-  public void Rockets() 
+  public void RocketsRear() 
   {	
   	fill(255, 0, 0, 75); 
   	
@@ -143,17 +143,19 @@ class SpaceShip extends Floater
   	//declare variables
   	double dRadians = myPointDirection*(Math.PI/180);
     int xRotatedTranslated, yRotatedTranslated;
-    cCorners = 4;
+    cCorners = 5;
   	xCCorners = new int[cCorners];
   	yCCorners = new int[cCorners];
-  	xCCorners[0] =-15*2;
-  	yCCorners[0] =  5*2;
-  	xCCorners[1] =-11*2;
-  	yCCorners[1] =  4*2;
-  	xCCorners[2] =-11*2;
-  	yCCorners[2] = -4*2;
-  	xCCorners[3] =-15*2;
-  	yCCorners[3] = -5*2;
+  	xCCorners[0] =-15;
+  	yCCorners[0] =  5;
+  	xCCorners[1] =-19;
+  	yCCorners[1] =  3;
+  	xCCorners[2] =-25;
+  	yCCorners[2] =  0;
+  	xCCorners[3] =-19;
+  	yCCorners[3] = -3;
+  	xCCorners[4] =-15;
+  	yCCorners[4] = -5;
     beginShape();         
     for(int nI = 0; nI < cCorners; nI++)    
     {     
@@ -163,9 +165,40 @@ class SpaceShip extends Floater
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);
+  }
 
-  	
-  }	//your code here*3
+  public void RocketsRight()
+  {
+  	//declare variables
+  	double dRadians = myPointDirection*(Math.PI/180);
+    int xRotatedTranslated, yRotatedTranslated;
+    
+    dCorners = 5;
+  	xDCorners = new int[dCorners];
+  	yDCorners = new int[dCorners];
+  	xDCorners[0] =-15;
+  	yDCorners[0] =  5;
+  	xDCorners[1] =-19;
+  	yDCorners[1] =  3;
+  	xDCorners[2] =-25;
+  	yDCorners[2] =  0;
+  	xDCorners[3] =-19;
+  	yDCorners[3] = -3;
+  	xDCorners[4] =-15;
+  	yDCorners[4] = -5;
+
+
+    beginShape();         
+    for(int nI = 0; nI < dCorners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xDCorners[nI]* Math.cos(dRadians)) - (yDCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xDCorners[nI]* Math.sin(dRadians)) + (yDCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);
+  }
+    //----------------------------------fix rockets right	
 }
 class Particle
 {
@@ -189,7 +222,7 @@ public void keyPressed()
   if(keyCode == 'W' || keyCode == UP)
   {
     wPressed = true;
-    Ship.Rockets();
+    Ship.RocketsRear();
   }
   if(keyCode == 'A' || keyCode == LEFT) 
   {
@@ -237,6 +270,11 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   protected int cCorners;
   protected int[] xCCorners;
   protected int[] yCCorners;
+
+  protected int dCorners;
+  protected int[] xDCorners;
+  protected int[] yDCorners;
+
   protected int myColor;   
   protected double myCenterX, myCenterY; //holds center coordinates   
   protected double myDirectionX, myDirectionY; //holds x and y coordinates of the vector for direction of travel   
@@ -318,12 +356,23 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     }   
     endShape(CLOSE);
     fill(255, 0, 0, 0); 
+    //shape for rear rockets
     beginShape();         
     for(int nI = 0; nI < cCorners; nI++)    
     {     
       //rotate and translate the coordinates of the floater using current direction 
       xRotatedTranslated = (int)((xCCorners[nI]* Math.cos(dRadians)) - (yCCorners[nI] * Math.sin(dRadians))+myCenterX);     
       yRotatedTranslated = (int)((xCCorners[nI]* Math.sin(dRadians)) + (yCCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE);
+    //shape for right rockets
+    beginShape();         
+    for(int nI = 0; nI < dCorners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xDCorners[nI]* Math.cos(dRadians)) - (yDCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xDCorners[nI]* Math.sin(dRadians)) + (yDCorners[nI] * Math.cos(dRadians))+myCenterY);      
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);
